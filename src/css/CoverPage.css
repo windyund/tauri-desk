@@ -1,0 +1,9 @@
+/* src/components/CoverPage.css */
+.cover-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust height as needed */
+    background-color: #f0f0f0; /* Fallback color */
+}
+
