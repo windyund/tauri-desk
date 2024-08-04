@@ -19,7 +19,7 @@
     },
     "windows": [
       {
-        "title": "数据展示看板",
+        "title": "效益分析系统",
         "height": 1200,
         "width": 1600
       }
@@ -32,8 +32,8 @@
       "targets": "all",
       "identifier": "tauri-desk.app",
       "category": "Utility",
-      "shortDescription": "网速监控工具",
-      "longDescription": "Net Stats是一个使用 Tauri 和 Solid 构建的网速监控工具",
+      "shortDescription": "效益分析系统",
+      "longDescription": "效益分析系统",
       "windows": {
         "wix": {
           "language": "zh-CN"

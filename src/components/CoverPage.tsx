@@ -15,9 +15,7 @@ const CoverPage = () => {
 
     return (
         <div className="cover-content">
-            {/*使用一张图片*/}
-            <img src="/images/cover2.jpg" width="100%" height="100%" alt="Cover Image"/>
-            {/*<h1>Welcome to My app!</h1>*/}
+            <img src="/images/cover.png" width="100%" height="100%" alt="Cover Image"/>
         </div>
     );
 };
