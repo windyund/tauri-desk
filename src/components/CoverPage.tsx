@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import {useEffect} from "react";
+import { useEffect } from 'react';
 import '../css/CoverPage.css';
 
 const CoverPage = () => {
@@ -15,8 +15,9 @@ const CoverPage = () => {
 
     return (
         <div className="cover-content">
-            <img src="/images/cover.png" width="100%" height="100%" alt="Cover Image"/>
+            <img src="/images/cover.png" alt="Cover Image"/>
         </div>
     );
 };
+
 export default CoverPage;

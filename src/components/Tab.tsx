@@ -1,7 +1,6 @@
 import { useEffect,useState } from 'react';
 import * as echarts from 'echarts';
 import '../App.css';
-import mockData from "./table.json";
 import graph1Data from "./data/graph1.json";
 import graph2Data from "./data/graph2.json";
 import graph3Data from "./data/graph3.json";
@@ -68,6 +67,10 @@ const Chart2: React.FC<ChartComponentProps1> = ({ title, data }) => {
                         position: 'left',
                     }
                 ],
+                grid: {
+                    left: '20%', // 调整左边距
+                    right: '2%'
+                },
                 series: [
                     {
                         name: '净收益',
@@ -108,7 +111,7 @@ const Chart2: React.FC<ChartComponentProps1> = ({ title, data }) => {
         };
     }, [title, data]);
 
-    return <div id={title} style={{ width: '100%', height: '400px' }}></div>;
+    return <div id={title} style={{ width: '100%', height: '324px' }}></div>;
 };
 
 
@@ -154,6 +157,10 @@ const Chart: React.FC<ChartComponentProps> = ({ title, data,x_name, y_name,color
                     type: 'value',
                     name: y_name,
                 },
+                grid: {
+                    left: '20%', // 调整左边距
+                    right: '2%'
+                },
                 series: seriesList,
             };
 
@@ -167,94 +174,9 @@ const Chart: React.FC<ChartComponentProps> = ({ title, data,x_name, y_name,color
         };
     }, [title, data]);
 
-    return <div id={title} style={{ width: '100%', height: '300px' }}></div>;
+    return <div id={title} style={{ width: '100%', height: '324px' }}></div>;
 };
 
-
-
-// @ts-ignore
-const ChartComponent = ({ title, data }) => {
-    useEffect(() => {
-        const chartDom = document.getElementById(title);
-        if (!chartDom) return;
-
-        const myChart = echarts.init(chartDom);
-        let option;
-
-        const run = (_rawData: any) => {
-            const countries = [
-                'Finland', 'France', 'Germany', 'Iceland', 'Norway', 'Poland', 'Russia', 'United Kingdom'
-            ];
-            const datasetWithFilters:any[] = [];
-            const seriesList:any[] = [];
-            echarts.util.each(countries, (country) => {
-                const datasetId = 'dataset_' + country;
-                datasetWithFilters.push({
-                    id: datasetId,
-                    fromDatasetId: 'dataset_raw',
-                    transform: {
-                        type: 'filter',
-                        config: {
-                            and: [
-                                { dimension: 'Year', gte: 1950 },
-                                { dimension: 'Country', '=': country }
-                            ]
-                        }
-                    }
-                });
-                seriesList.push({
-                    type: 'line',
-                    datasetId: datasetId,
-                    showSymbol: false,
-                    name: country,
-                    endLabel: {
-                        show: true,
-                        formatter: (params: { value: any[]; }) => {
-                            return `${params.value[3]}: ${params.value[0]}`;
-                        }
-                    },
-                    labelLayout: {
-                        moveOverlap: 'shiftY'
-                    },
-                    emphasis: {
-                        focus: 'series'
-                    },
-                    encode: {
-                        x: 'Year',
-                        y: 'Income',
-                        label: ['Country', 'Income'],
-                        itemName: 'Year',
-                        tooltip: ['Income']
-                    }
-                });
-            });
-
-            option = {
-                animationDuration: 1000,
-                dataset: [
-                    { id: 'dataset_raw', source: _rawData },
-                    ...datasetWithFilters
-                ],
-                // title: { text: title },
-                tooltip: { order: 'valueDesc', trigger: 'axis' },
-                xAxis: { type: 'category', nameLocation: 'middle' },
-                yAxis: { name: 'Income' },
-                grid: { right: 140 },
-                series: seriesList
-            };
-
-            myChart.setOption(option);
-        };
-
-        run(data);
-
-        return () => {
-            myChart.dispose();
-        };
-    }, [title, data]);
-
-    return <div id={title} style={{ width: '100%', height: '300px' }}></div>;
-};
 
 const App = () => {
     const [oilPrice,setOilPrice] =useState("");
@@ -290,32 +212,59 @@ const App = () => {
                 <div className="input-upload-section">
                     <h2>参数输入：</h2>
                     <div className="param-inputs">
-                        <label>原油价格(美元/桶): <input type="text" value={oilPrice} onChange={(e)=> setOilPrice(e.target.value)}/> </label>
-                        <label>天然气价格(元/千方): <input type="text" value={gasPrice} onChange={(e)=>setGasPrice(e.target.value)}/></label>
-                        <label>原油商品率(%): <input type="text" value={param3} onChange={(e)=>setParam3(e.target.value)}/></label>
-                        <label>天然气商品率(%): <input type="text" value={param4} onChange={(e)=>setParam4(e.target.value)}/></label>
-                        <label>累计产油量(万吨): <input type="text" value={param5} onChange={(e)=>setParam5(e.target.value)}/></label>
-                        <label>累计伴生气量(亿方): <input type="text" value={param6} onChange={(e)=>setParam6(e.target.value)}/></label>
-                        <label>方案计算期(年): <input type="text" value={param7} onChange={(e)=>setParam7(e.target.value)}/></label>
-                        <label>方案部署井口(口): <input type="text" value={param8} onChange={(e)=>setParam8(e.target.value)}/></label>
-                        <label>改造井数(口): <input type="text" value={param9} onChange={(e)=>setParam9(e.target.value)}/></label>
-                        <label>单位改造成本(万元/口): <input type="text" value={param10} onChange={(e)=>setParam10(e.target.value)}/></label>
-                        <label>碳埋存补贴(元/吨): <input type="text" value={param11} onChange={(e)=>setParam11(e.target.value)}/></label>
-                        <label>碳价(元/吨): <input type="text" value={param12} onChange={(e)=>setParam12(e.target.value)}/></label>
-                        <label>项目折现率(%): <input type="text" value={param13} onChange={(e)=>setParam13(e.target.value)}/></label>
-                        <label>运输距离(km): <input type="text" value={param14} onChange={(e)=>setParam14(e.target.value)}/></label>
-                        <label>CO₂循环比例(%): <input type="text" value={param15} onChange={(e)=>setParam15(e.target.value)}/></label>
-                        <label>综合税率(%): <input type="text" value={param16} onChange={(e)=>setParam16(e.target.value)}/></label>
+                        <label>原油价格(美元/桶): <input type="text" value={oilPrice}
+                                                         onChange={(e) => setOilPrice(e.target.value)}/> </label>
+                        <label>天然气价格(元/千方): <input type="text" value={gasPrice}
+                                                           onChange={(e) => setGasPrice(e.target.value)}/></label>
+                        <label>原油商品率(%): <input type="text" value={param3}
+                                                     onChange={(e) => setParam3(e.target.value)}/></label>
+                        <label>天然气商品率(%): <input type="text" value={param4}
+                                                       onChange={(e) => setParam4(e.target.value)}/></label>
+                        <label>累计产油量(万吨): <input type="text" value={param5}
+                                                        onChange={(e) => setParam5(e.target.value)}/></label>
+                        <label>累计伴生气量(亿方): <input type="text" value={param6}
+                                                          onChange={(e) => setParam6(e.target.value)}/></label>
+                        <label>方案计算期(年): <input type="text" value={param7}
+                                                      onChange={(e) => setParam7(e.target.value)}/></label>
+                        <label>方案部署井口(口): <input type="text" value={param8}
+                                                        onChange={(e) => setParam8(e.target.value)}/></label>
+                        <label>改造井数(口): <input type="text" value={param9}
+                                                    onChange={(e) => setParam9(e.target.value)}/></label>
+                        <label>单位改造成本(万元/口): <input type="text" value={param10}
+                                                             onChange={(e) => setParam10(e.target.value)}/></label>
+                        <label>碳埋存补贴(元/吨): <input type="text" value={param11}
+                                                         onChange={(e) => setParam11(e.target.value)}/></label>
+                        <label>碳价(元/吨): <input type="text" value={param12}
+                                                   onChange={(e) => setParam12(e.target.value)}/></label>
+                        <label>项目折现率(%): <input type="text" value={param13}
+                                                     onChange={(e) => setParam13(e.target.value)}/></label>
+                        <label>运输距离(km): <input type="text" value={param14}
+                                                    onChange={(e) => setParam14(e.target.value)}/></label>
+                        <label>CO₂循环比例(%): <input type="text" value={param15}
+                                                      onChange={(e) => setParam15(e.target.value)}/></label>
+                        <label>综合税率(%): <input type="text" value={param16}
+                                                   onChange={(e) => setParam16(e.target.value)}/></label>
+                    </div>
 
+                    <div className="buttons" >
+                        {/*按钮靠右侧展示*/}
+
+                        <button onClick={renderCharts} >计算</button>
+                    </div>
+
+                    <div className="param-inputs">
+                        <h2>导入Excel：</h2>
+                        <input type="file" id="file" name="file" accept=".xls,.xlsx"/>
                     </div>
                     <div className="buttons">
-                        <button onClick={renderCharts}>渲染图例</button>
+                        <button onClick={renderCharts}>计算</button>
                     </div>
+
                 </div>
                 <div className="charts-section">
                     <div className="chart">
                         <h3>成本曲线：</h3>
-                        <Chart  key={`graph1-${key}`} title="成本曲线" data={graph1Data} x_name="CO2埋存量(万吨)" y_name="总成本(万元)" color="#5470C6"/>
+                        <Chart key={`graph1-${key}`} title="成本曲线" data={graph1Data} x_name="CO2埋存量(万吨)" y_name="总成本(万元)" color="#5470C6"/>
                     </div>
                     <div className="chart">
                         <h3>环境效益曲线：</h3>
@@ -330,11 +279,6 @@ const App = () => {
                         <h3>收益曲线：</h3>
                         <Chart2  key={`graph4-${key}`} title="收益曲线" data={graph4Data}/>
                     </div>
-
-                    {/*<div className="chart">*/}
-                    {/*    <h3>示例数据：</h3>*/}
-                    {/*    <ChartComponent key={`mock-${key}`} title="曲线4" data={mockData}/>*/}
-                    {/*</div>*/}
                 </div>
             </div>
         </div>

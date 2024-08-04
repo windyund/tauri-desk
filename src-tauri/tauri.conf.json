@@ -20,8 +20,8 @@
     "windows": [
       {
         "title": "效益分析系统",
-        "height": 1200,
-        "width": 1600
+        "height": 900,
+        "width": 1300
       }
     ],
     "security": {
