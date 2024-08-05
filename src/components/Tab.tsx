@@ -68,8 +68,8 @@ const Chart2: React.FC<ChartComponentProps1> = ({ title, data }) => {
                     }
                 ],
                 grid: {
-                    left: '20%', // 调整左边距
-                    right: '2%'
+                    left: '10%', // 调整左边距
+                    right: '10%'
                 },
                 series: [
                     {
@@ -111,7 +111,7 @@ const Chart2: React.FC<ChartComponentProps1> = ({ title, data }) => {
         };
     }, [title, data]);
 
-    return <div id={title} style={{ width: '100%', height: '324px' }}></div>;
+    return <div id={title} style={{ width: '100%', height: '305px' }}></div>;
 };
 
 
@@ -158,8 +158,8 @@ const Chart: React.FC<ChartComponentProps> = ({ title, data,x_name, y_name,color
                     name: y_name,
                 },
                 grid: {
-                    left: '20%', // 调整左边距
-                    right: '2%'
+                    left: '10%', // 调整左边距
+                    right: '10%'
                 },
                 series: seriesList,
             };
@@ -174,7 +174,7 @@ const Chart: React.FC<ChartComponentProps> = ({ title, data,x_name, y_name,color
         };
     }, [title, data]);
 
-    return <div id={title} style={{ width: '100%', height: '324px' }}></div>;
+    return <div id={title} style={{ width: '100%', height: '305px' }}></div>;
 };
 
 
@@ -185,10 +185,9 @@ const App = () => {
     const [param4,setParam4] =useState("96");
     const [param5,setParam5] =useState("8,836.81");
     const [param6,setParam6] =useState("21.94");
-    const [param7,setParam7] =useState("21");
+    const [param7,setParam7] =useState("15");
     const [param8,setParam8] =useState("350");
     const [param9,setParam9] =useState("120");
-    const [param10,setParam10] =useState("500");
     const [param11,setParam11] =useState("100");
     const [param12,setParam12] =useState("");
     const [param13,setParam13] =useState("12");
@@ -230,8 +229,6 @@ const App = () => {
                                                         onChange={(e) => setParam8(e.target.value)}/></label>
                         <label>改造井数(口): <input type="text" value={param9}
                                                     onChange={(e) => setParam9(e.target.value)}/></label>
-                        <label>单位改造成本(万元/口): <input type="text" value={param10}
-                                                             onChange={(e) => setParam10(e.target.value)}/></label>
                         <label>碳埋存补贴(元/吨): <input type="text" value={param11}
                                                          onChange={(e) => setParam11(e.target.value)}/></label>
                         <label>碳价(元/吨): <input type="text" value={param12}
@@ -264,7 +261,7 @@ const App = () => {
                 <div className="charts-section">
                     <div className="chart">
                         <h3>成本曲线：</h3>
-                        <Chart key={`graph1-${key}`} title="成本曲线" data={graph1Data} x_name="CO2埋存量(万吨)" y_name="总成本(万元)" color="#5470C6"/>
+                        <Chart key={`graph1-${key}`} title="成本曲线" data={graph1Data} x_name="CO2埋存量(吨)" y_name="总成本(万元)" color="#5470C6"/>
                     </div>
                     <div className="chart">
                         <h3>环境效益曲线：</h3>

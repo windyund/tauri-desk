@@ -176,10 +176,6 @@ html, body, #root, .app {
   border: 1px solid #004d40;
   font-size: 12px; /* 调整输入框字体大小 */
 }
-/*.buttons {*/
-/*  display: flex;*/
-/*  justify-content: flex-end; !* 将按钮靠右侧对齐 *!*/
-/*}*/
 .buttons button {
   margin-right: 10px;
   padding: 5px 10px;
