@@ -1,4 +1,4 @@
-import { useEffect,useState } from 'react';
+import {useEffect, useState} from 'react';
 import * as echarts from 'echarts';
 import '../App.css';
 import graph1Data from "./data/graph1.json";
@@ -14,15 +14,17 @@ interface DataPoint {
 interface ChartComponentProps {
     title: string;
     data: DataPoint[];
-    x_name:string;
-    y_name:string;
+    x_name: string;
+    y_name: string;
     color?: string;
+    chart: number;
 }
 
 
 interface ChartComponentProps1 {
     title: string;
     data: DataPoint1[];
+    chart: number;
 }
 
 interface DataPoint1 {
@@ -30,7 +32,8 @@ interface DataPoint1 {
     Y1: string;
     Y2: string;
 }
-const Chart2: React.FC<ChartComponentProps1> = ({ title, data }) => {
+
+const Chart2: React.FC<ChartComponentProps1> = ({title, data, chart}) => {
     useEffect(() => {
         const chartDom = document.getElementById(title);
         if (!chartDom) return;
@@ -68,8 +71,8 @@ const Chart2: React.FC<ChartComponentProps1> = ({ title, data }) => {
                     }
                 ],
                 grid: {
-                    left: '10%', // 调整左边距
-                    right: '10%'
+                    left: '15%', // 调整左边距
+                    right: '5%'
                 },
                 series: [
                     {
@@ -103,7 +106,10 @@ const Chart2: React.FC<ChartComponentProps1> = ({ title, data }) => {
 
             myChart.setOption(option);
         };
-
+        console.log("number:", chart)
+        if (chart <= 0) {
+            data = []
+        }
         run(data);
 
         return () => {
@@ -111,11 +117,11 @@ const Chart2: React.FC<ChartComponentProps1> = ({ title, data }) => {
         };
     }, [title, data]);
 
-    return <div id={title} style={{ width: '100%', height: '305px' }}></div>;
+    return <div id={title} style={{width: '100%', height: '286px'}}></div>;
 };
 
 
-const Chart: React.FC<ChartComponentProps> = ({ title, data,x_name, y_name,color }) => {
+const Chart: React.FC<ChartComponentProps> = ({title, data, x_name, y_name, color, chart}) => {
     useEffect(() => {
         const chartDom = document.getElementById(title);
         if (!chartDom) return;
@@ -140,6 +146,9 @@ const Chart: React.FC<ChartComponentProps> = ({ title, data,x_name, y_name,color
                     width: 2, // 线条宽度
                 },
             }];
+            if (x_name == 'CO2埋存量(吨)') {
+                x_name = 'CO₂埋存量(吨)'
+            }
 
             option = {
                 animationDuration: 1000,
@@ -158,51 +167,78 @@ const Chart: React.FC<ChartComponentProps> = ({ title, data,x_name, y_name,color
                     name: y_name,
                 },
                 grid: {
-                    left: '10%', // 调整左边距
-                    right: '10%'
+                    left: '15%', // 调整左边距
+                    right: '5%'
                 },
                 series: seriesList,
             };
 
             myChart.setOption(option);
         };
-
+        console.log("number:", chart)
+        console.log("before data:", data)
+        if (chart <= 0) {
+            data = []
+        }
+        console.log("after data:", data)
         run(data);
 
         return () => {
-            myChart.dispose();
+           myChart.dispose();
         };
     }, [title, data]);
 
-    return <div id={title} style={{ width: '100%', height: '305px' }}></div>;
+    return <div id={title} style={{width: '100%', height: '286px'}}></div>;
 };
 
 
 const App = () => {
-    const [oilPrice,setOilPrice] =useState("");
-    const [gasPrice,setGasPrice] =useState("2100");
-    const [param3,setParam3] =useState("99.1");
-    const [param4,setParam4] =useState("96");
-    const [param5,setParam5] =useState("8,836.81");
-    const [param6,setParam6] =useState("21.94");
-    const [param7,setParam7] =useState("15");
-    const [param8,setParam8] =useState("350");
-    const [param9,setParam9] =useState("120");
-    const [param11,setParam11] =useState("100");
-    const [param12,setParam12] =useState("");
-    const [param13,setParam13] =useState("12");
-    const [param14,setParam14] =useState("200");
-    const [param15,setParam15] =useState("29");
-    const [param16,setParam16] =useState("25");
+    const [oilPrice, setOilPrice] = useState("75");
+    const [gasPrice, setGasPrice] = useState("1600");
+    const [param3, setParam3] = useState("99.1");
+    const [param4, setParam4] = useState("96");
+    const [param5, setParam5] = useState("16126");
+    const [param6, setParam6] = useState("21.94");
+    const [param7, setParam7] = useState("15");
+    const [param8, setParam8] = useState("500");
+    const [param11, setParam11] = useState("100");
+    const [param12, setParam12] = useState("98");
+    const [param14, setParam14] = useState("200");
+    const [param15, setParam15] = useState("52");
+    const [param16, setParam16] = useState("25");
 
-    const [key, setKey] = useState(0);
+    //分别控制每个曲线组件
+    const [chart1, setChart1] = useState(0);
+    const [chart2, setChart2] = useState(0);
+    const [chart3, setChart3] = useState(0);
+    const [chart4, setChart4] = useState(0);
 
 
-    const renderCharts = () => {
-        // 通过更新 key 强制重新渲染组件
-        setKey(prevKey => prevKey + 1);
+    // 通过更新 key 强制重新渲染组件
+    const renderCharts = (index: number) => {
+        switch (index) {
+            case 0:
+                setChart1(prevState => prevState + 1);
+                setChart2(prevState => prevState + 1);
+                setChart3(prevState => prevState + 1);
+                setChart4(prevState => prevState + 1);
+                break;
+            case 1:
+                setChart1(prevState => prevState + 1);
+                break;
+            case 2:
+                setChart2(prevState => prevState + 1);
+                break;
+            case 3:
+                setChart3(prevState => prevState + 1);
+                break;
+            case 4:
+                setChart4(prevState => prevState + 1);
+                break;
+            default:
+                console.log("init")
+        }
     };
-
 
     return (
         <div className="app">
@@ -227,14 +263,10 @@ const App = () => {
                                                       onChange={(e) => setParam7(e.target.value)}/></label>
                         <label>方案部署井口(口): <input type="text" value={param8}
                                                         onChange={(e) => setParam8(e.target.value)}/></label>
-                        <label>改造井数(口): <input type="text" value={param9}
-                                                    onChange={(e) => setParam9(e.target.value)}/></label>
                         <label>碳埋存补贴(元/吨): <input type="text" value={param11}
                                                          onChange={(e) => setParam11(e.target.value)}/></label>
                         <label>碳价(元/吨): <input type="text" value={param12}
                                                    onChange={(e) => setParam12(e.target.value)}/></label>
-                        <label>项目折现率(%): <input type="text" value={param13}
-                                                     onChange={(e) => setParam13(e.target.value)}/></label>
                         <label>运输距离(km): <input type="text" value={param14}
                                                     onChange={(e) => setParam14(e.target.value)}/></label>
                         <label>CO₂循环比例(%): <input type="text" value={param15}
@@ -243,38 +275,46 @@ const App = () => {
                                                    onChange={(e) => setParam16(e.target.value)}/></label>
                     </div>
 
-                    <div className="buttons" >
-                        {/*按钮靠右侧展示*/}
-
-                        <button onClick={renderCharts} >计算</button>
+                    <div className="buttons">
+                        <button onClick={() => renderCharts(0)}>计算</button>
                     </div>
-
                     <div className="param-inputs">
                         <h2>导入Excel：</h2>
-                        <input type="file" id="file" name="file" accept=".xls,.xlsx"/>
+                        <input type="file" id="file" name="file" accept=".xls,.xlsx" style={{width: '200px'}}/>
                     </div>
                     <div className="buttons">
-                        <button onClick={renderCharts}>计算</button>
+                        <button onClick={() => renderCharts(0)}>优化对比</button>
+                    </div>
+
+                    <div className="buttons">
+                        <button onClick={() => renderCharts(1)}>生成成本曲线</button>
+                        <button onClick={() => renderCharts(2)}>生成环境效益</button>
+
+                        <button onClick={() => renderCharts(3)}>生成社会效益</button>
+                        <button onClick={() => renderCharts(4)}>生成收益曲线</button>
                     </div>
 
                 </div>
                 <div className="charts-section">
                     <div className="chart">
                         <h3>成本曲线：</h3>
-                        <Chart key={`graph1-${key}`} title="成本曲线" data={graph1Data} x_name="CO2埋存量(吨)" y_name="总成本(万元)" color="#5470C6"/>
+                        <Chart key={`graph1-${chart1}`} title="成本曲线" data={graph1Data} x_name="CO2埋存量(吨)"
+                               y_name="总成本(万元)" color="#5470C6" chart={chart1}/>
                     </div>
                     <div className="chart">
                         <h3>环境效益曲线：</h3>
-                        <Chart  key={`graph2-${key}`} title="环境效益曲线" data={graph2Data} x_name="碳价格(元/吨)" y_name="环境效益(万元)" color="#91CC75"/>
+                        <Chart key={`graph2-${chart2}`} title="环境效益曲线" data={graph2Data} x_name="碳价格(元/吨)"
+                               y_name="环境效益(万元)" color="#91CC75" chart={chart2}/>
                     </div>
                     <div className="chart">
                         <h3>社会效益曲线：</h3>
-                        <Chart   key={`graph3-${key}`} title="社会效益曲线" data={graph3Data} x_name="增油量(万吨)" y_name="社会效益(万元)" color="#FAC858"/>
+                        <Chart key={`graph3-${chart3}`} title="社会效益曲线" data={graph3Data} x_name="增油量(万吨)"
+                               y_name="社会效益(万元)" color="#FAC858" chart={chart3}/>
                     </div>
 
                     <div className="chart">
                         <h3>收益曲线：</h3>
-                        <Chart2  key={`graph4-${key}`} title="收益曲线" data={graph4Data}/>
+                        <Chart2 key={`graph4-${chart4}`} title="收益曲线" data={graph4Data} chart={chart4}/>
                     </div>
                 </div>
             </div>

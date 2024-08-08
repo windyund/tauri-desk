@@ -1,9 +1,9 @@
 .logo.vite:hover {
-  filter: drop-shadow(0 0 2em #747bff);
+  filter: drop-shadow(0 0 2em #8B008B);  /* 深紫色阴影 */
 }
 
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafb);
+  filter: drop-shadow(0 0 2em #FF1493);  /* 深粉色阴影 */
 }
 
 :root {
@@ -12,8 +12,8 @@
   line-height: 24px;
   font-weight: 400;
 
-  color: #0f0f0f;
-  background-color: #f6f6f6;
+  color: #E6E6FA;  /* 淡紫色文字颜色 */
+  background-color: #000000;  /* 纯黑色背景 */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -39,7 +39,7 @@
 }
 
 .logo.tauri:hover {
-  filter: drop-shadow(0 0 2em #24c8db);
+  filter: drop-shadow(0 0 2em #00FFFF);  /* 青色阴影 */
 }
 
 .row {
@@ -49,12 +49,12 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #FFD700;  /* 金黄色链接颜色 */
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
+  color: #FFA500;  /* 橙黄色悬停链接颜色 */
 }
 
 h1 {
@@ -69,8 +69,8 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  color: #0f0f0f;
-  background-color: #ffffff;
+  color: #E6E6FA;  /* 淡紫色输入和按钮文字颜色 */
+  background-color: #222222;  /* 深灰色输入和按钮背景 */
   transition: border-color 0.25s;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
@@ -80,12 +80,12 @@ button {
 }
 
 button:hover {
-  border-color: #396cd8;
+  border-color: #8B008B;  /* 深紫色悬停边框颜色 */
 }
 
 button:active {
-  border-color: #396cd8;
-  background-color: #e8e8e8;
+  border-color: #8B008B;  /* 深紫色活动边框颜色 */
+  background-color: #333333;  /* 更深的灰色活动背景 */
 }
 
 input,
@@ -99,26 +99,26 @@ button {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    color: #f6f6f6;
-    background-color: #2f2f2f;
+    color: #E6E6FA;
+    background-color: #000000;
   }
 
   a:hover {
-    color: #24c8db;
+    color: #FFA500;
   }
 
   input,
   button {
-    color: #ffffff;
-    background-color: #0f0f0f98;
+    color: #E6E6FA;
+    background-color: #222222;
   }
 
   button:active {
-    background-color: #0f0f0f69;
+    background-color: #333333;
   }
 }
 
-html, body, #root, .app {
+html, body, #root,.app {
   height: 100%;
   margin: 0;
   font-family: 'Arial, sans-serif';
@@ -128,12 +128,12 @@ html, body, #root, .app {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f0f4f8; /* Light background color */
+  background-color: #111111;  /* 更黑的主背景 */
   box-sizing: border-box;
 }
 
 .title {
-  color: #004d40;
+  color: #FFD700;  /* 金黄色标题颜色 */
   text-align: center;
   margin-bottom: 5px;
   flex: 0 0 auto;
@@ -150,80 +150,80 @@ html, body, #root, .app {
 }
 
 .input-upload-section {
-  background-color: #ffffff; /* White background for input section */
-  color: #004d40;
+  background-color: #222222;  /* 深灰色输入上传部分背景 */
+  color: #FFD700;  /* 金黄色文字颜色 */
   padding: 10px;
   border-radius: 10px;
   width: 20%;
-  /*flex: 0 0 10%; !* 将侧边栏宽度缩小到15% *!*/
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  font-size: 12px; /* 调整侧边栏字体大小 */
+  font-size: 12px;
   height: 100%;
 }
 
-.param-inputs label, .buttons, .file-input {
+.param-inputs label,.buttons,.file-input {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* 在两端对齐内容 */
-  margin-bottom: 5px; /* 添加一些间距 */
+  justify-content: space-between;
+  margin-bottom: 5px;
 }
 
 .param-inputs label input {
   border-radius: 5px;
   padding: 5px;
   width: 40%;
-  border: 1px solid #004d40;
-  font-size: 12px; /* 调整输入框字体大小 */
+  border: 1px solid #FFD700;  /* 金黄色边框 */
+  font-size: 12px;
 }
+
 .buttons button {
-   margin-right: 10px;
-   padding: 5px 10px;
-   border-radius: 5px;
-   background-color: #00796b;
-   color: #ffffff;
-   border: none;
-   cursor: pointer;
- }
+  margin-right: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #333333;  /* 更深的灰色按钮背景 */
+  color: #FFD700;  /* 金黄色文字 */
+  border: none;
+  cursor: pointer;
+}
 
 .buttons button:hover {
-  background-color: #004d40;
+  background-color: #444444;  /* 更深的灰色悬停背景 */
 }
+
 .cost-curve-button {
   margin-right: 10px;
   padding: 12px 25px;
   border-radius: 10px;
-  border: 2px solid #4CAF50;  /* 绿色边框 */
-  color: #4CAF50;  /* 绿色文字 */
+  border: 2px solid #00FFFF;  /* 青色边框 */
+  color: #00FFFF;  /* 青色文字 */
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
 
-  transition: border-color 0.3s ease, color 0.3s ease;  /* 平滑的颜色过渡效果 */
+  transition: border-color 0.3s ease, color 0.3s ease;
 
   &:hover {
-    border-color: #388E3C;  /* 鼠标悬停时边框颜色变深 */
-    color: #388E3C;  /* 鼠标悬停时文字颜色变深 */
+    border-color: #40E0D0;  /* 蓝绿色悬停边框 */
+    color: #40E0D0;  /* 蓝绿色悬停文字 */
   }
 }
 
-
 .charts-section {
   display: flex;
-  flex-wrap: wrap; /* 允许图表换行 */
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 3px;
-  flex: 1 1 80%; /* 将图表区域宽度调整为85% */
+  flex: 1 1 80%;
   height: 100%;
 }
 
 .chart {
-  background-color: #ffffff; /* White background for charts */
-  padding: 5px; /* 减少填充以节省空间 */
+  background-color: #222222;  /* 深灰色图表背景 */
+  padding: 5px;
   border-radius: 10px;
-  color: #004d40;
+  color: #FFD700;  /* 金黄色文字 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  flex: 0 0 calc(50% - 2px); /* 使每个图表占一半宽度，并留出间隙 */
+  flex: 0 0 calc(50% - 2px);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
