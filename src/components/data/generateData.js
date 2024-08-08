@@ -2,8 +2,8 @@
 const generateChartData1 = () => {
     const data = [];
     for (let x = 0; x <= 10000; x += 500) {
-        let y = -4.2903 * Math.pow(10, -8) *  Math.pow(x,3) - 0.0044 * Math.pow(x,2) + 70.8661 * x + 8.6288 * Math.pow(10,3);
-
+        // let y = -4.2903 * Math.pow(10, -8) *  Math.pow(x,3) - 0.0044 * Math.pow(x,2) + 70.8661 * x + 8.6288 * Math.pow(10,3);
+           let y = f(x);
         data.push({
             X: x,
             Y: y.toFixed(2) // 保留两位小数
@@ -11,11 +11,16 @@ const generateChartData1 = () => {
     }
     return data;
 };
+
+function f(x) {
+    return -6.9676 * Math.pow(10, -9) * Math.pow(x, 3) + 0.0012 * Math.pow(x, 2) + 15.2815 * x + 9.8123 * Math.pow(10, 3);
+}
 
 const generateChartData2 = () => {
     const data = [];
     for (let x = 75; x <= 160; x += 5) {
-        let y =  1.1930 * Math.pow(x, 3) - 552.1503 * Math.pow(x, 2) + 8.4604 * Math.pow(10, 4) * x - 3.8297 * Math.pow(10, 6);
+        // let y =  1.1930 * Math.pow(x, 3) - 552.1503 * Math.pow(x, 2) + 8.4604 * Math.pow(10, 4) * x - 3.8297 * Math.pow(10, 6);
+        let y = f2(x);
         data.push({
             X: x,
             Y: y.toFixed(2) // 保留两位小数
@@ -23,6 +28,9 @@ const generateChartData2 = () => {
     }
     return data;
 };
+function f2(x) {
+    return 2.2624 * Math.pow(x, 3) - 777.3050 * Math.pow(x, 2) + 9.1435 * Math.pow(10, 4) * x - 3.5252 * Math.pow(10, 6);
+}
 
 const generateChartData3 = () => {
     const data = [];
@@ -62,7 +70,7 @@ const generateChartData4 = () => {
 
 
 // 生成示例数据
-const exampleData = generateChartData3();
+const exampleData = generateChartData2();
 
 // 转换数据为 JSON 字符串
 const jsonData = JSON.stringify(exampleData);

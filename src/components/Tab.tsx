@@ -5,6 +5,9 @@ import graph1Data from "./data/graph1.json";
 import graph2Data from "./data/graph2.json";
 import graph3Data from "./data/graph3.json";
 import graph4Data from "./data/graph4.json";
+import graph12Data from "./data/graph12.json";
+import graph22Data from "./data/graph22.json";
+
 
 interface DataPoint {
     X: number;
@@ -214,6 +217,16 @@ const App = () => {
     const [chart4, setChart4] = useState(0);
 
 
+    const getChart1Data = () => {
+        // 根据param11的值决定使用哪个数据集
+        return parseInt(param11) > 100 ? graph12Data : graph1Data;
+    };
+
+    const getChart2Data = () => {
+        // 根据param11的值决定使用哪个数据集
+        return parseInt(param12) > 100 ? graph22Data : graph2Data;
+    };
+
     // 通过更新 key 强制重新渲染组件
     const renderCharts = (index: number) => {
         switch (index) {
@@ -298,12 +311,12 @@ const App = () => {
                 <div className="charts-section">
                     <div className="chart">
                         <h3>成本曲线：</h3>
-                        <Chart key={`graph1-${chart1}`} title="成本曲线" data={graph1Data} x_name="CO2埋存量(吨)"
+                        <Chart key={`graph1-${chart1}`} title="成本曲线" data={getChart1Data()} x_name="CO2埋存量(吨)"
                                y_name="总成本(万元)" color="#5470C6" chart={chart1}/>
                     </div>
                     <div className="chart">
                         <h3>环境效益曲线：</h3>
-                        <Chart key={`graph2-${chart2}`} title="环境效益曲线" data={graph2Data} x_name="碳价格(元/吨)"
+                        <Chart key={`graph2-${chart2}`} title="环境效益曲线" data={getChart2Data()} x_name="碳价格(元/吨)"
                                y_name="环境效益(万元)" color="#91CC75" chart={chart2}/>
                     </div>
                     <div className="chart">

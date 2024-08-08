@@ -1,29 +1,12 @@
-.logo.vite:hover {
-  filter: drop-shadow(0 0 2em #747bff);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafb);
-}
-
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-
-  color: #0f0f0f;
-  background-color: #f6f6f6;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  line-height: 1.5;
+  color: #ffffff; /* 使用白色文本 */
+  background-color: #121212; /* 深色背景 */
 }
 
 .container {
-  margin: 0;
   padding-top: 10vh;
   display: flex;
   flex-direction: column;
@@ -34,12 +17,11 @@
 .logo {
   height: 6em;
   padding: 1.5em;
-  will-change: filter;
   transition: 0.75s;
 }
 
-.logo.tauri:hover {
-  filter: drop-shadow(0 0 2em #24c8db);
+.logo:hover {
+  filter: drop-shadow(0 0 2em #747bff);
 }
 
 .row {
@@ -48,189 +30,87 @@
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: #748ffc;
+  text-decoration: none;
 }
 
 a:hover {
-  color: #535bf2;
+  color: #5a67d8;
 }
 
 h1 {
+  margin: 0;
+  padding: 0.5em;
   text-align: center;
+  background-color: #1a202c; /* 深蓝色标题背景 */
+  color: #cbd5e0; /* 淡蓝色标题文字 */
 }
 
-input,
-button {
+input, button {
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  border: none;
+  padding: 0.8em 1.2em;
   font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  color: #0f0f0f;
-  background-color: #ffffff;
-  transition: border-color 0.25s;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-}
-
-button {
-  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(145deg, #6ee7b7, #3b82f6); /* 渐变背景 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  border-color: #396cd8;
+  background: linear-gradient(145deg, #3b82f6, #6ee7b7);
 }
 
-button:active {
-  border-color: #396cd8;
-  background-color: #e8e8e8;
-}
-
-input,
-button {
+input:focus, button:focus {
   outline: none;
-}
-
-#greet-input {
-  margin-right: 5px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: #f6f6f6;
-    background-color: #2f2f2f;
-  }
-
-  a:hover {
-    color: #24c8db;
-  }
-
-  input,
-  button {
-    color: #ffffff;
-    background-color: #0f0f0f98;
-  }
-
-  button:active {
-    background-color: #0f0f0f69;
-  }
-}
-
-html, body, #root, .app {
-  height: 100%;
-  margin: 0;
-  font-family: 'Arial, sans-serif';
+  box-shadow: 0 0 0 2px #5a67d8;
 }
 
 .app {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f0f4f8; /* Light background color */
-  box-sizing: border-box;
+  background-color: #242c37; /* 深灰色背景 */
 }
 
 .title {
-  color: #004d40;
-  text-align: center;
-  margin-bottom: 5px;
-  flex: 0 0 auto;
+  color: #10b981; /* 明亮的绿色 */
 }
 
 .content-section {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  flex: 1 1 auto;
   padding: 20px;
-  box-sizing: border-box;
-  gap:5px;
+  gap: 20px;
 }
 
-.input-upload-section {
-  background-color: #ffffff; /* White background for input section */
-  color: #004d40;
-  padding: 10px;
-  border-radius: 10px;
-  width: 20%;
-  /*flex: 0 0 10%; !* 将侧边栏宽度缩小到15% *!*/
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  font-size: 12px; /* 调整侧边栏字体大小 */
-  height: 100%;
-}
-
-.param-inputs label, .buttons, .file-input {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* 在两端对齐内容 */
-  margin-bottom: 5px; /* 添加一些间距 */
-}
-
-.param-inputs label input {
-  border-radius: 5px;
-  padding: 5px;
-  width: 40%;
-  border: 1px solid #004d40;
-  font-size: 12px; /* 调整输入框字体大小 */
-}
-.buttons button {
-   margin-right: 10px;
-   padding: 5px 10px;
-   border-radius: 5px;
-   background-color: #00796b;
-   color: #ffffff;
-   border: none;
-   cursor: pointer;
- }
-
-.buttons button:hover {
-  background-color: #004d40;
-}
-.cost-curve-button {
-  margin-right: 10px;
-  padding: 12px 25px;
-  border-radius: 10px;
-  border: 2px solid #4CAF50;  /* 绿色边框 */
-  color: #4CAF50;  /* 绿色文字 */
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-
-  transition: border-color 0.3s ease, color 0.3s ease;  /* 平滑的颜色过渡效果 */
-
-  &:hover {
-    border-color: #388E3C;  /* 鼠标悬停时边框颜色变深 */
-    color: #388E3C;  /* 鼠标悬停时文字颜色变深 */
-  }
-}
-
-
-.charts-section {
-  display: flex;
-  flex-wrap: wrap; /* 允许图表换行 */
-  justify-content: space-between;
-  gap: 3px;
-  flex: 1 1 80%; /* 将图表区域宽度调整为85% */
-  height: 100%;
+.input-upload-section, .charts-section {
+  background-color: #2d3748; /* 界面左侧深灰背景 */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .chart {
-  background-color: #ffffff; /* White background for charts */
-  padding: 5px; /* 减少填充以节省空间 */
+  background: linear-gradient(145deg, #1a202c, #2d3748);
   border-radius: 10px;
-  color: #004d40;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  flex: 0 0 calc(50% - 2px); /* 使每个图表占一半宽度，并留出间隙 */
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  min-width: calc(50% - 2px);
+  color: #81e6d9; /* 水绿色文字 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  min-width: calc(50% - 10px);
 }
 
-.echarts-container {
-  width: 100%;
-  height: 100%;
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #e2e8f0;
+    background-color: #1a202c;
+  }
+
+  a:hover {
+    color: #63b3ed;
+  }
+
+  button:active {
+    background-color: #2b6cb0;
+  }
 }
