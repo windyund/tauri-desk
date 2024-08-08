@@ -8,7 +8,7 @@ const CoverPage = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             navigate('/menu'); // Replace with your main page route
-        }, 3000);
+        }, 2000);
 
         return () => clearTimeout(timer);
     }, [navigate]);
