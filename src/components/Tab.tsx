@@ -1,4 +1,6 @@
 import {useEffect, useState} from 'react';
+import { Link } from 'react-router-dom';
+import TabChart from './TabChart';
 import * as echarts from 'echarts';
 import '../App.css';
 import graph1Data from "./data/graph1.json";
@@ -7,6 +9,9 @@ import graph3Data from "./data/graph3.json";
 import graph4Data from "./data/graph4.json";
 import graph12Data from "./data/graph12.json";
 import graph22Data from "./data/graph22.json";
+import graph1 from "./data/graph_data1.json";
+import graph2 from "./data/graph_data2.json";
+import graph3 from "./data/graph_data3.json";
 
 
 interface DataPoint {
@@ -61,10 +66,12 @@ const Chart2: React.FC<ChartComponentProps1> = ({title, data, chart}) => {
                     type: 'value',
                     name: '碳交易价格(元/吨)',
                     nameLocation: 'middle',
-                    nameGap: 25, // 向下偏移 25 像素
+                    nameGap: 40, // 向下偏移 25 像素
                     nameTextStyle: {
                         fontSize: 14
-                    }
+                    },
+                    min: 'dataMin', // 设置X轴的最小值为数据的最小值
+                    max: 'dataMax', // 设置X轴的最大值为数据的最大值
                 },
                 yAxis: [
                     {
@@ -110,9 +117,9 @@ const Chart2: React.FC<ChartComponentProps1> = ({title, data, chart}) => {
             myChart.setOption(option);
         };
         console.log("number:", chart)
-        if (chart <= 0) {
+       /* if (chart <= 0) {
             data = []
-        }
+        }*/
         run(data);
 
         return () => {
@@ -120,7 +127,7 @@ const Chart2: React.FC<ChartComponentProps1> = ({title, data, chart}) => {
         };
     }, [title, data]);
 
-    return <div id={title} style={{width: '100%', height: '286px'}}></div>;
+    return <div id={title} style={{width: '80%', height: '286px'}}></div>;
 };
 
 
@@ -178,12 +185,9 @@ const Chart: React.FC<ChartComponentProps> = ({title, data, x_name, y_name, colo
 
             myChart.setOption(option);
         };
-        console.log("number:", chart)
-        console.log("before data:", data)
         if (chart <= 0) {
             data = []
         }
-        console.log("after data:", data)
         run(data);
 
         return () => {
@@ -255,7 +259,20 @@ const App = () => {
 
     return (
         <div className="app">
-            <h1 className="title">页岩油绿色开发与碳埋存效益分析系统</h1>
+            <h1 className="title">
+                <div className="header-buttons">
+                    <Link to="/page1">
+                        <button>碳价预测</button>
+                    </Link>
+                    <Link to="/page2">
+                        <button>内部收益率</button>
+                    </Link>
+                    <Link to="/page3">
+                        <button>软件说明</button>
+                    </Link>
+                </div>
+                页岩油绿色开发与碳埋存效益分析系统
+            </h1>
             <div className="content-section">
                 <div className="input-upload-section">
                     <h2>参数输入：</h2>
@@ -311,18 +328,25 @@ const App = () => {
                 <div className="charts-section">
                     <div className="chart">
                         <h3>成本曲线：</h3>
-                        <Chart key={`graph1-${chart1}`} title="成本曲线" data={getChart1Data()} x_name="CO2埋存量(吨)"
-                               y_name="总成本(万元)" color="#5470C6" chart={chart1}/>
+                        {/*<Chart key={`graph1-${chart1}`} title="成本曲线" data={getChart1Data()} x_name="CO2埋存量(吨)"*/}
+                        {/*       y_name="总成本(万元)" color="#5470C6" chart={chart1}/>*/}
+                        <TabChart key={`graph1-${chart1}`} title="成本曲线" lines={graph1} x_name="CO2埋存量(吨)"
+                                  y_name="总成本(万元)" chart={chart1}/>
                     </div>
                     <div className="chart">
                         <h3>环境效益曲线：</h3>
-                        <Chart key={`graph2-${chart2}`} title="环境效益曲线" data={getChart2Data()} x_name="碳价格(元/吨)"
-                               y_name="环境效益(万元)" color="#91CC75" chart={chart2}/>
+                        {/*<Chart key={`graph2-${chart2}`} title="环境效益曲线" data={getChart2Data()} x_name="碳价格(元/吨)"*/}
+                        {/*       y_name="环境效益(万元)" color="#91CC75" chart={chart2}/>*/}
+                        <TabChart key={`graph2-${chart2}`} title="环境效益曲线" lines={graph2} x_name="碳价格(元/吨)"
+                                  y_name="环境效益(万元)" chart={chart2}/>
                     </div>
                     <div className="chart">
                         <h3>社会效益曲线：</h3>
-                        <Chart key={`graph3-${chart3}`} title="社会效益曲线" data={graph3Data} x_name="增油量(万吨)"
-                               y_name="社会效益(万元)" color="#FAC858" chart={chart3}/>
+                        {/*<Chart key={`graph3-${chart3}`} title="社会效益曲线" data={graph3Data} x_name="增油量(万吨)"*/}
+                        {/*       y_name="社会效益(万元)" color="#FAC858" chart={chart3}/>*/}
+
+                        <TabChart key={`graph3-${chart3}`} title="社会效益曲线" lines={graph3} x_name="增油量(万吨)"
+                                  y_name="社会效益(万元)" chart={chart3}/>
                     </div>
 
                     <div className="chart">

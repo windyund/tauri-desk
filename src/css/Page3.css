@@ -1,0 +1,57 @@
+.page3 {
+    padding: 20px;
+    position: relative;
+}
+
+.page3 h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.content-section {
+    margin-bottom: 40px;
+    text-align: center; /* 确保内容居中对齐 */
+    display: block; /* 确保内容块级显示，避免水平排列 */
+}
+
+.content-section .image {
+    display: block;
+    margin: 0 auto 20px auto; /* 确保图片在文字上方，并添加下方的外边距 */
+    width: 60%; /* 调整图片宽度为页面宽度的60% */
+    max-width: 800px; /* 最大宽度为800px，防止在大屏幕上过大 */
+    height: auto; /* 保持图片纵横比 */
+
+}
+
+.content-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+    margin: 0 20px; /* 添加左右的内边距 */
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.back-button:active {
+    transform: translateY(1px);
+}
