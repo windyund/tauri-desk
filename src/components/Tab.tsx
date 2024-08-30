@@ -188,7 +188,7 @@ const App = () => {
                                                        onChange={(e) => setParam4(e.target.value)}/></label>
                         <label>累计产油量(万吨): <input type="text" value={param5}
                                                         onChange={(e) => setParam5(e.target.value)}/></label>
-                        <label>累计伴生气量(亿方): <input type="text" value={param6}
+                        <label>单井增油量(万吨): <input type="text" value={param6}
                                                           onChange={(e) => setParam6(e.target.value)}
                                                           placeholder="输入3-15之间数"/></label>
                         <label>方案计算期(年): <input type="text" value={param7}
