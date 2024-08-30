@@ -9,13 +9,13 @@
     text-align: center;
 }
 
-.content-section {
+.content-section3 {
     margin-bottom: 40px;
     text-align: center; /* 确保内容居中对齐 */
     display: block; /* 确保内容块级显示，避免水平排列 */
 }
 
-.content-section .image {
+.content-section3 .image {
     display: block;
     margin: 0 auto 20px auto; /* 确保图片在文字上方，并添加下方的外边距 */
     width: 60%; /* 调整图片宽度为页面宽度的60% */
@@ -24,7 +24,7 @@
 
 }
 
-.content-section p {
+.content-section3 p {
     font-size: 16px;
     line-height: 1.6;
     text-align: justify;

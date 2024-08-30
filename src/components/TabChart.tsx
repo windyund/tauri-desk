@@ -18,9 +18,11 @@ interface ChartComponentProps {
     x_name: string;
     y_name: string;
     chart: number;
+    params: any;
 }
 
-const TabChart: React.FC<ChartComponentProps> = ({ title, lines, x_name, y_name,chart }) => {
+const TabChart: React.FC<ChartComponentProps> = ({title, lines, x_name, y_name, params}) => {
+    let newLines = lines
     useEffect(() => {
         const chartDom = document.getElementById(title);
         if (!chartDom) return;
@@ -28,8 +30,48 @@ const TabChart: React.FC<ChartComponentProps> = ({ title, lines, x_name, y_name,
         const myChart = echarts.init(chartDom);
         let option;
 
+        let paramsInt = parseInt(params)
+        if ("碳价格(元/吨)" === x_name) {
+            if (paramsInt >= 85 && paramsInt <= 155) {
+                let diff = Math.floor((155 - 85) / 10)
+                let index = Math.floor((parseInt(params) - 85) / 10)
+                if (index < 0) {
+                    index = 0
+                }
+                if (index >= diff) {
+                    index = diff - 1
+                }
+                newLines = lines.slice(index, index + 1)
+            }
+        } else if ("CO2埋存量(吨)" === x_name) {
+            if (paramsInt >= 100 && paramsInt <= 200) {
+                let diff = Math.floor((200 - 100) / 20)
+                let index = Math.floor((parseInt(params) - 100) / 20)
+                if (index < 0) {
+                    index = 0
+                }
+                if (index >= diff) {
+                    index = diff - 1
+                }
+                newLines = lines.slice(index, index + 1)
+            }
+        } else if ("增油量(万吨)" === x_name) {
+            if (paramsInt >= 3 && paramsInt <= 15) {
+                let diff = Math.floor((15 - 3) / 2)
+                let index = Math.floor((parseInt(params) - 3) / 2)
+                if (index < 0) {
+                    index = 0
+                }
+                if (index >= diff) {
+                    index = diff - 1
+                }
+                newLines = lines.slice(index, index + 1)
+            }
+        }
+
+
         const run = () => {
-            const seriesList: echarts.SeriesOption[] = lines.map(line => ({
+            const seriesList: echarts.SeriesOption[] = newLines.map(line => ({
                 type: 'line',
                 name: line.name,
                 data: line.data.map(item => ({
@@ -44,7 +86,6 @@ const TabChart: React.FC<ChartComponentProps> = ({ title, lines, x_name, y_name,
                     width: 2, // 线条宽度
                 },
             }));
-
             option = {
                 animationDuration: 1000,
                 tooltip: {
@@ -54,8 +95,9 @@ const TabChart: React.FC<ChartComponentProps> = ({ title, lines, x_name, y_name,
                     }
                 },
                 legend: {
-                    data: lines.map(line => line.name), // 自动生成图例
+                    data: newLines.map(line => line.name), // 自动生成图例
                 },
+                // 如果min和max都为0，则设置为自动，否则设置为传入的值
                 xAxis: {
                     type: 'value',
                     name: x_name,
@@ -66,7 +108,6 @@ const TabChart: React.FC<ChartComponentProps> = ({ title, lines, x_name, y_name,
                     nameTextStyle: {
                         fontSize: 14
                     }
-
                 },
                 yAxis: {
                     type: 'value',
@@ -79,7 +120,6 @@ const TabChart: React.FC<ChartComponentProps> = ({ title, lines, x_name, y_name,
                 },
                 series: seriesList,
             };
-
             myChart.setOption(option);
         };
         /*if (chart <= 0) {
@@ -90,8 +130,8 @@ const TabChart: React.FC<ChartComponentProps> = ({ title, lines, x_name, y_name,
         return () => {
             myChart.dispose();
         };
-    }, [title, lines]);
+    }, [title, newLines]);
 
-    return <div id={title} style={{ width: '90%', height: '286px' }}></div>;
+    return <div id={title} style={{width: '100%', height: '286px'}}></div>;
 };
 export default TabChart;

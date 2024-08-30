@@ -11,13 +11,13 @@ const Page3: React.FC = () => {
             <button className="back-button" onClick={handleBack}>返回</button>
             <h1>软件说明</h1>
 
-            <div className="content-section">
+            <div className="content-section3">
                 <img src="/images/cover.png" width="50%" alt="效益分析系统主界面图" className="image"/>
                 <p>1.此页面为陆相页岩油绿色开采和协同碳埋存效益分析系统的主界面。通过此进入软件的操作界面。</p>
 
             </div>
 
-            <div className="content-section">
+            <div className="content-section3">
 
                 <img src="/images/main.png"  width="50%"  alt="效益分析系统操作界面图" className="image"/>
                 <p>2.在进入软件的操作界面后，我们可以看到在软件的左侧包括：原油价格、天然气价格、原油商品率、天然气商品率、累计产油量、累计产气量、方案计算期、方案部署井口、碳埋存补贴、碳价、项目折现率、CO₂循环比例、综合税率总13个参数。其中主要修改参数为：原油价格、天然气价格、碳价及碳埋存补贴。</p>
