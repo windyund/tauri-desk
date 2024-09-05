@@ -8,6 +8,11 @@ import graph1 from "./data/graph_data1.json";
 import graph2 from "./data/graph_data2.json";
 import graph3 from "./data/graph_data3.json";
 
+import graph21 from "./data/graph_data21.json";
+import graph22 from "./data/graph_data22.json";
+import graph23 from "./data/graph_data23.json";
+import graph24 from "./data/graph_data24.json";
+
 
 
 interface ChartComponentProps1 {
@@ -130,7 +135,7 @@ const App = () => {
     const [chart2, setChart2] = useState(0);
     const [chart3, setChart3] = useState(0);
     const [chart4, setChart4] = useState(0);
-
+    const [page, setPage] = useState(0); // State to track the current page
 
     // 通过更新 key 强制重新渲染组件
     const renderCharts = (index: number) => {
@@ -171,13 +176,20 @@ const App = () => {
                     <Link to="/page3">
                         <button>软件说明</button>
                     </Link>
+                    {/*<div className="buttons">*/}
+                        {page === 0 ? (
+                            <button onClick={() => setPage(1)}>下一页</button>
+                        ) : (
+                            <button onClick={() => setPage(0)}>上一页</button>
+                        )}
+                    {/*</div>*/}
                 </div>
                 页岩油绿色开发与碳埋存效益分析系统
             </h1>
             <div className="content-section">
                 <div className="input-upload-section">
                     <h2>参数输入：</h2>
-                     <div className="param-inputs">
+                    <div className="param-inputs">
                         <label>原油价格(美元/桶): <input type="text" value={oilPrice}
                                                          onChange={(e) => setOilPrice(e.target.value)}/> </label>
                         <label>天然气价格(元/千方): <input type="text" value={gasPrice}
@@ -229,27 +241,57 @@ const App = () => {
                     </div>
                 </div>
                 <div className="charts-section">
-                    <div className="chart">
-                        <h3>成本曲线：</h3>
-                        <TabChart key={`graph1-${chart1}`} title="成本曲线" lines={graph1} x_name="CO2埋存量(吨)"
-                                  y_name="总成本(万元)" chart={chart1} params={param11}/>
-                    </div>
-                    <div className="chart">
-                        <h3>环境效益曲线：</h3>
-                        <TabChart key={`graph2-${chart2}`} title="环境效益曲线" lines={graph2} x_name="碳价格(元/吨)"
-                                  y_name="环境效益(万元)" chart={chart2} params={param12}/>
-                    </div>
-                    <div className="chart">
-                        <h3>社会效益曲线：</h3>
-                        <TabChart key={`graph3-${chart3}`} title="社会效益曲线" lines={graph3} x_name="增油量(万吨)"
-                                  y_name="社会效益(万元)" chart={chart3} params={param6}/>
-                    </div>
-
-                    <div className="chart">
-                        <h3>收益曲线：</h3>
-                        <Chart2 key={`graph4-${chart4}`} title="收益曲线" data={graph4Data} chart={chart4}/>
-                    </div>
+                    {page === 0 ? (
+                        <>
+                            <div className="chart">
+                                <h3>成本曲线：</h3>
+                                <TabChart key={`graph1-${chart1}`} title="成本曲线" lines={graph1}
+                                          x_name="CO2埋存量(吨)" y_name="总成本(万元)" chart={chart1} params={param11}/>
+                            </div>
+                            <div className="chart">
+                                <h3>环境效益曲线：</h3>
+                                <TabChart key={`graph2-${chart2}`} title="环境效益曲线" lines={graph2}
+                                          x_name="碳价格(元/吨)" y_name="环境效益(万元)" chart={chart2}
+                                          params={param12}/>
+                            </div>
+                            <div className="chart">
+                                <h3>社会效益曲线：</h3>
+                                <TabChart key={`graph3-${chart3}`} title="社会效益曲线" lines={graph3}
+                                          x_name="增油量(万吨)" y_name="社会效益(万元)" chart={chart3} params={param6}/>
+                            </div>
+                            <div className="chart">
+                                <h3>收益曲线：</h3>
+                                <Chart2 key={`graph4-${chart4}`} title="收益曲线" data={graph4Data} chart={chart4}/>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div className="chart">
+                                <h3>环境效益曲线：</h3>
+                                <TabChart key={`graph2-${chart2}`} title="环境效益曲线" lines={graph21}
+                                          x_name="温度(℃)" y_name="环境效益(万元)" chart={chart2}
+                                          params={param12}/>
+                            </div>
+                            <div className="chart">
+                                <h3>经济效益曲线：</h3>
+                                <TabChart key={`graph3-${chart3}`} title="经济效益曲线" lines={graph22}
+                                          x_name="温度(℃)" y_name="经济效益(万元)" chart={chart3} params={param6}/>
+                            </div>
+                            <div className="chart">
+                                <h3>成本曲线：</h3>
+                                <TabChart key={`graph3-${chart3}`} title="成本曲线" lines={graph23}
+                                          x_name="温度(℃)" y_name="成本效益(万元)" chart={chart3} params={param11}/>
+                            </div>
+                            <div className="chart">
+                                <h3>产油速率曲线：</h3>
+                                <TabChart key={`graph4-${chart4}`} title="收益曲线" lines={graph24}
+                                          x_name="温度(℃)" y_name="产油速率(%)" chart={chart3} params={0}/>
+                            </div>
+                        </>
+                    )}
                 </div>
+
+
             </div>
 
         </div>

@@ -31,7 +31,7 @@ const TabChart: React.FC<ChartComponentProps> = ({title, lines, x_name, y_name, 
         let option;
 
         let paramsInt = parseInt(params)
-        if ("碳价格(元/吨)" === x_name) {
+        if ("碳价格(元/吨)" === x_name || '环境效益(万元)'== y_name) {
             if (paramsInt >= 85 && paramsInt <= 155) {
                 let diff = Math.floor((155 - 85) / 10)
                 let index = Math.floor((parseInt(params) - 85) / 10)
@@ -43,7 +43,7 @@ const TabChart: React.FC<ChartComponentProps> = ({title, lines, x_name, y_name, 
                 }
                 newLines = lines.slice(index, index + 1)
             }
-        } else if ("CO2埋存量(吨)" === x_name) {
+        } else if ("CO2埋存量(吨)" === x_name || "成本效益(万元)"==y_name) {
             if (paramsInt >= 100 && paramsInt <= 200) {
                 let diff = Math.floor((200 - 100) / 20)
                 let index = Math.floor((parseInt(params) - 100) / 20)
@@ -55,7 +55,7 @@ const TabChart: React.FC<ChartComponentProps> = ({title, lines, x_name, y_name, 
                 }
                 newLines = lines.slice(index, index + 1)
             }
-        } else if ("增油量(万吨)" === x_name) {
+        } else if ("增油量(万吨)" === x_name  || "经济效益(万元)"==y_name) {
             if (paramsInt >= 3 && paramsInt <= 15) {
                 let diff = Math.floor((15 - 3) / 2)
                 let index = Math.floor((parseInt(params) - 3) / 2)
@@ -122,9 +122,6 @@ const TabChart: React.FC<ChartComponentProps> = ({title, lines, x_name, y_name, 
             };
             myChart.setOption(option);
         };
-        /*if (chart <= 0) {
-            lines = []
-        }*/
         run();
 
         return () => {
